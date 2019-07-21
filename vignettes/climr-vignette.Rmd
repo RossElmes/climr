@@ -26,7 +26,9 @@ The package take weather data from NASA and fits different types of models to it
 `plot.climr_fit` is a plot method that takes a climr_fit object produced from the `fit.climr` method. It will produces a nice plot.  
 `plot.climr_gp_fit` is a plot method that takes a climr_gp_fit object produced from the `gp_fit.climr` method. It also produces a nice plot.  
 
-## Install the package
+## Load the package
+
+Make sure the package is downloaded from github using `devtools::install_github("RossElmes/climr")`  Libray funtion below will load the functions in to be used.  
 
 ```{r}
 library(climr)
