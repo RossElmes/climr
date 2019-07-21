@@ -1,0 +1,70 @@
+---
+title: "Climr 0.1.1"
+author: "Ross Elmes"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Package Discription. 
+
+The package take weather data from NASA and fits different types of models to it and creates nice plots to visualize the model.  There are 5 functions within the package.  
+
+`load_clim` loads data from the NASA website. It will return a climr object.  
+`fit.climr` is a fit method which takes a climr object and fits a linear function to the data.  Produces a climr_fit object.  
+`gp_fit.climr` is a gp_fit method that accepts a climr object and fits a Gaussian process where optimization method can be specified. Produces a climr_gp_fit object.  
+`plot.climr_fit` is a plot method that takes a climr_fit object produced from the `fit.climr` method. It will produces a nice plot.  
+`plot.climr_gp_fit` is a plot method that takes a climr_gp_fit object produced from the `gp_fit.climr` method. It also produces a nice plot.  
+
+## Install the package
+
+```{r}
+library(climr)
+```
+
+## Load Data 
+
+The below function will pull weather data from the NASA website.  All data will be pulled if you leave arguments blank.  You can specify an argument also if you only want to pull from specific hemisphere.  Use the `type` argument for this feature. 
+
+```{r}
+df <- load_clim(type = "NH")
+
+```
+
+
+## Example Example Fit 
+
+There are two different fit methods.  One using linear methods and then the other uses different optimization techniques to fit a Gaussian Process.  Examples of how to call both fits are below.  Both methods expect a climr object to be passed to them.  Check out the different optimization techniques that can be used by specifying the `optim_method` argument. 
+
+```{r echo=TRUE, message=TRUE, warning=TRUE}
+
+linear_fit <- fit(df)
+
+gaussian_process <- gp_fit(df,optim_method = "BFGS")
+
+```
+
+First example will produce a climr_fit object.  The optimized Gaussian Process fit method will produce a climr_gp_fit object.  
+
+## Example Plots 
+
+There are two plot methods created depending on the type of fit object passed to plot. 
+
+```{r}
+plot(linear_fit)
+```
+
+```{r}
+plot(gaussian_process)
+```
+
